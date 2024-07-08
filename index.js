@@ -49,19 +49,64 @@ const: when we decleare a variable to const.it's value not change(not re-assign)
 let: it is block-scope variable.when we declare a variable to let.inside the curly brackets (means in block).its  not acessable out of block.
 var: it's function block scope variable.when we declare variable var inside function.it is not acessable out of function.but var variable acessable out of block.
  */
-// step3_a & b
+// step03_a & b
 import a from "./first.js";
 import { b, c as d } from "./second.js";
 console.log(a + b + d);
-// step3_c & d
+// step03_c & d
 import inquirer from "inquirer";
 import chalk from "chalk";
 const user_answer = await inquirer.prompt([
     {
-        message: "Enter Your Age:",
+        message: chalk.green("Enter Your Age:"),
         type: "number",
         name: "age",
     },
 ]);
 console.log(chalk.blue.bgWhite.bold(`inshallah, in`, chalk.red.underline(`${60 - user_answer.age}`) +
-    ` years you will be 60years old.`));
+    ` years you will be`, chalk.yellow(`60`) + `years old.`));
+// step04_union_literal
+let myName;
+myName = null;
+console.log(myName);
+myName = "zia";
+console.log(myName);
+//myName = undefined;    // error type is not define 'undefine'
+//myName = 32;        // error type is not define 'number'
+let myAge;
+myAge = 16;
+console.log(myAge);
+console.log(myAge.toString());
+//console.log(myAge.toLowerCase());  // error 
+myAge = "Dont know";
+console.log(myAge);
+console.log(myAge.toString());
+console.log(myAge.toLowerCase());
+console.log(myAge.toUpperCase());
+let newAge = Math.random() > 0.6 ? "khan" : 60;
+//console.log(newAge.toUpperCase());  // error
+if (newAge === "khan") {
+    // type of newAge is string
+    newAge.toUpperCase(); //can be called
+}
+if (typeof newAge === "string") {
+    newAge.toLowerCase();
+}
+typeof newAge === "string"
+    ? newAge.toUpperCase()
+    : newAge.toFixed();
+let age;
+age = 19;
+age = "died";
+age = "unknown";
+//age = "living"   // error type does not exit
+let zia;
+zia = "zia";
+//zia = "khan"   // error
+let yourName = Math.random() > 0.6 ? "Hira khan" : undefined;
+if (yourName) {
+    yourName.toUpperCase();
+}
+//yourName.toUpperCase()  //error
+yourName?.toUpperCase();
+let data;

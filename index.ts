@@ -55,20 +55,20 @@ let: it is block-scope variable.when we declare a variable to let.inside the cur
 var: it's function block scope variable.when we declare variable var inside function.it is not acessable out of function.but var variable acessable out of block.  
  */
 
-// step3_a & b
+// step03_a & b
 
 import a from "./first.js";
 import { b, c as d } from "./second.js";
 
 console.log(a + b + d);
 
-// step3_c & d
+// step03_c & d
 import inquirer from "inquirer";
 import chalk from "chalk";
 
 const user_answer = await inquirer.prompt([
   {
-    message: "Enter Your Age:",
+    message: chalk.green("Enter Your Age:"),
     type: "number",
     name: "age",
   },
@@ -76,7 +76,70 @@ const user_answer = await inquirer.prompt([
 console.log(
   chalk.blue.bgWhite.bold(
     `inshallah, in`,
-    chalk.red.underline(`${60 - user_answer.age}`) +
-      ` years you will be 60years old.`
+    chalk.red.underline(`${60 - user_answer.age}`) + ` years you will be`,
+    chalk.yellow(`60`) + `years old.`
   )
 );
+
+// step04_union_literal
+
+let myName: string | null;
+myName = null;
+console.log(myName);
+
+myName = "zia";
+console.log(myName);
+
+//myName = undefined;    // error type is not define 'undefine'
+//myName = 32;        // error type is not define 'number'
+
+let myAge: number | string;
+myAge = 16;
+console.log(myAge);
+console.log(myAge.toString());
+//console.log(myAge.toLowerCase());  // error
+
+myAge = "Dont know";
+console.log(myAge);
+console.log(myAge.toString());
+console.log(myAge.toLowerCase());
+console.log(myAge.toUpperCase());
+
+let newAge = Math.random() > 0.6 ? "khan" : 60;
+
+//console.log(newAge.toUpperCase());  // error
+
+if (newAge === "khan") {
+  // type of newAge is string
+  newAge.toUpperCase(); //can be called
+}
+if (typeof newAge === "string") {
+  newAge.toLowerCase();
+}
+
+typeof newAge === "string" ? newAge.toUpperCase() : newAge.toFixed();
+
+let age: number | "died" | "unknown";
+age = 19;
+age = "died";
+age = "unknown";
+//age = "living"   // error type does not exit
+
+let zia: "zia";
+zia = "zia";
+//zia = "khan"   // error
+
+let yourName = Math.random() > 0.6 ? "Hira khan" : undefined;
+if (yourName) {
+  yourName.toUpperCase();
+}
+//yourName.toUpperCase()  //error
+yourName?.toUpperCase();
+
+// you can also define type alias
+type RawData = string | number | boolean | null | undefined;
+let data: RawData;
+
+// you can even combine
+type Id = string | number;
+type IdmayBe = Id | undefined | null;
