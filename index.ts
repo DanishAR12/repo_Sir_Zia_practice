@@ -143,3 +143,229 @@ let data: RawData;
 // you can even combine
 type Id = string | number;
 type IdmayBe = Id | undefined | null;
+
+//step05_a_object
+let teacher = {
+  name: "Hira Khan",
+  age: 28,
+};
+console.log(teacher);
+console.log(teacher.name);
+console.log(teacher["age"]);
+
+// Type Declaration
+let student: {
+  name: string;
+  age: number;
+};
+student = {
+  name: "Ali Ahmed",
+  age: 30,
+};
+console.log(student.name);
+console.log(student["age"]);
+
+// step05_b_aliasing
+//anonymous type
+let teacher1: { name: string; age: number } = {
+  name: "Danish",
+  age: 33,
+};
+
+// Aliasing type
+type Student = {
+  name: string;
+  rollNo: number;
+};
+let student2: Student = {
+  name: "Hira khan",
+  rollNo: 12345,
+};
+console.log(student2);
+console.log(student2.name); // acesses dot notation
+console.log(student2["rollNo"]); // acesses square notation
+
+//Interfaces
+interface Manager {
+  name: string;
+  subordiates?: number; // opitional properties
+}
+let storeManager: Manager = {
+  name: "Ahmed",
+};
+//step05_c_stractual_typing_obeject
+interface Ball {
+  diameter: number;
+}
+interface Sphare {
+  diameter: number;
+}
+let ball: Ball = {
+  diameter: 10,
+};
+let sphaer: Sphare = {
+  diameter: 20,
+};
+sphaer = ball;
+ball = sphaer; //because properties same
+
+interface Tube {
+  diameter: number;
+  color: string;
+}
+let tube: Tube = {
+  diameter: 15,
+  color: "green",
+};
+
+ball = tube; // property diameter is 'ball'
+//tube = ball; //  error property color missing 'ball'
+
+let myType = { id: 1, name: "Ali" };
+//case01
+myType = { id: 2, name: "Asad" }; // can only asigin property value change
+//case02
+//myType = {id:2,person_name:"Asad"};   // error property renamed or missing
+//case03
+let x: { id: number; name: string; [d: string]: any };
+x = { id: 2, name: "sajjad", fullName: "sajjad mahmood", anotherName: "asif" };
+//case04
+//myType = { id: 2, name: "asad", age: 33 }; // error acesses property
+
+//case when stale object literl are asigned to a variable.
+let myType2 = { id: 2, name: "Asad" };
+myType = myType2; // can only asigned same properties fresh & stale object
+
+let myType3 = { id: 2, person_name: "Asad" };
+// myType = myType3; //error renamed or missing property fresh & stale object
+
+let myType4 = { id: 3, name: "Asad", age: 23 };
+myType = myType4; // no error mytype property exist mytype4.
+//myType4 = myType; // error mytype4 property does not exist mytype.
+
+let x1: { id: number; [x: string]: any };
+let y1 = { id: 1, fullName: "Asad Ali" };
+x1 = y1; // ok fullName matched index signture.
+/*
+let x2: {foo:number};
+x2 = {foo:1,baz:2}; // error escess property 'baz'
+
+let y2: {foo:number,bar?:number};
+y2 = {foo:2,baz:3};  // error misspled property 'baz'
+
+let a:{foo:number};
+let a1 = {foo:3,baz:4};
+a = a1; // no error
+
+let z:{foo:number,bar?:number};
+let z1 = {foo:2,baz:3};
+z = z1; // no error
+*/
+
+//step05_Nested_object
+type Authur = { firstName: string; lastName: string };
+
+type Book = {
+  authur: Authur;
+  book_Name: string;
+};
+const myBook: Book = {
+  authur: {
+    firstName: "Zia",
+    lastName: "Khan",
+  },
+  book_Name: "my best book",
+};
+console.log(myBook.authur.lastName);
+// another example
+type Student$ = {
+  name: string;
+  rollNo: number;
+  course: { course1: string; course2: string; course3: string };
+};
+let student3: Student$ = {
+  name: "Danish",
+  rollNo: 345,
+  course: {
+    course1: "typescript",
+    course2: "python",
+    course3: "php",
+  },
+};
+console.log(student3.course.course2);
+
+// step05e_Intersection_type
+interface Student5 {
+  student_id: number;
+  studentName: string;
+}
+interface Teacher5 {
+  teacher_id: number;
+  teacherName: string;
+}
+type intersectioned_type = Student5 & Teacher5;
+
+let obj1: intersectioned_type = {
+  teacherName: "Hamza Alvi",
+  teacher_id: 456,
+  student_id: 789,
+  studentName: "Danish",
+};
+console.log(obj1.studentName);
+console.log(obj1.teacher_id);
+
+//step05f_any_unknown_never
+// any type
+// any uses when data fatch kar raha ha api sa kisi ap ko nahi pata hota ya jo data
+//ay ga is ki type kya ha.is error ko remove karna ka lya type any karta ha.
+let a2: any; //ok
+a2 = 23;
+a2 = "Ali";
+a2 = true;
+a2 = [1, 2, 3];
+a2 = {
+  name: "danish",
+  age: 33,
+};
+a2 = null;
+a2 = undefined;
+a2 = Math.random();
+a2 = () => {
+  console.log("Hello World!");
+};
+// unknown type
+let b2: unknown;
+b2 = 23;
+b2 = "Ali";
+b2 = true;
+b2 = [1, 2, 3];
+b2 = {
+  name: "danish",
+  age: 33,
+};
+b2 = null;
+b2 = undefined;
+b2 = Math.random();
+b2 = () => {
+  console.log("Hello World!");
+};
+//Asigning value of type unknown to variable other data types.
+let c: unknown;
+let c1: any = c;
+let c2: unknown = c;
+//let c3:boolean = c; // error
+//let c4:string = c;  // error
+
+// never type
+function error(message: string): never {
+  throw new Error(message); // function return not
+}
+//infered type never
+function fail() {
+  return error("somethings failed");
+}
+
+//Function returning never must not have a reachable end point.
+function infiniteloop(): never {
+  while (true) {}
+}
