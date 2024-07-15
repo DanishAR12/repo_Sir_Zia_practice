@@ -253,3 +253,56 @@ function fail() {
 function infiniteloop() {
     while (true) { }
 }
+//step06_explict_casting
+let myName1 = "Hello World!";
+console.log(myName1.length);
+console.log(myName1.length);
+console.log(myName1.toUpperCase());
+//console.log(myName1.toUpperCase());    // error
+//step07_enum
+var Color;
+(function (Color) {
+    Color[Color["red"] = 0] = "red";
+    Color[Color["green"] = 1] = "green";
+    Color[Color["blue"] = 2] = "blue";
+})(Color || (Color = {}));
+let c5 = Color.red;
+console.log(c5); // 0
+console.log(Color.green); // 1
+console.log(Color.blue); // 2
+var Color1;
+(function (Color1) {
+    Color1[Color1["red"] = 2] = "red";
+    Color1[Color1["green"] = 3] = "green";
+    Color1[Color1["blue"] = 4] = "blue";
+})(Color1 || (Color1 = {}));
+let colorName = Color1[3];
+console.log(colorName);
+console.log(Color1.red); // 2
+console.log(Color1.green); // 3
+console.log(Color1.blue); // 4
+var Color2;
+(function (Color2) {
+    Color2[Color2["red"] = 1] = "red";
+    Color2[Color2["green"] = 2] = "green";
+    Color2[Color2["blue"] = 4] = "blue";
+})(Color2 || (Color2 = {}));
+let colorIndex = Color2["blue"];
+console.log(colorIndex); // 4
+console.log(Color2["green"]); // 2
+console.log(Color2["red"]); // 1
+let c6 = 0 /* Color3.red */;
+console.log(c6);
+let colorIndex2 = 4 /* Color5["blue"] */;
+console.log(colorIndex2);
+//step10_Tuples
+//case1
+let tuple = [33, "danish"];
+let secondElement = tuple[1];
+console.log(secondElement); // danish
+const passingResponce = ["{}", 200];
+const staff = [
+    [0, "adnan", "ad@"],
+    [1, "asad", "as@"],
+    [2, "ali", "al@"],
+];

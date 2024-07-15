@@ -369,3 +369,83 @@ function fail() {
 function infiniteloop(): never {
   while (true) {}
 }
+
+//step06_explict_casting
+
+let myName1: unknown = "Hello World!";
+console.log((myName1 as string).length);
+console.log((<string>myName1).length);
+console.log((myName1 as string).toUpperCase());
+//console.log(myName1.toUpperCase());    // error
+
+//step07_enum
+enum Color {
+  red,
+  green,
+  blue,
+}
+let c5: Color = Color.red;
+console.log(c5); // 0
+console.log(Color.green); // 1
+console.log(Color.blue); // 2
+
+enum Color1 {
+  red = 2,
+  green,
+  blue,
+}
+let colorName: string = Color1[3];
+console.log(colorName);
+
+console.log(Color1.red); // 2
+console.log(Color1.green); // 3
+console.log(Color1.blue); // 4
+
+enum Color2 {
+  red = 1,
+  green = 2,
+  blue = 4,
+}
+let colorIndex: number = Color2["blue"];
+console.log(colorIndex); // 4
+console.log(Color2["green"]); // 2
+console.log(Color2["red"]); // 1
+
+//step07_const_enum
+const enum Color3 {
+  red,
+  green,
+  blue,
+}
+let c6: Color3 = Color3.red;
+console.log(c6);
+
+const enum Color4 {
+  red = 2,
+  green,
+  blue,
+}
+//let colorName2:string = Color3[2];//Not allowed with const enums
+//console.log(colorName2);
+
+const enum Color5 {
+  red = 1,
+  green = 2,
+  blue = 4,
+}
+let colorIndex2: number = Color5["blue"];
+console.log(colorIndex2);
+
+//step10_Tuples
+//case1
+let tuple: [number, string] = [33, "danish"];
+let secondElement = tuple[1];
+console.log(secondElement); // danish
+const passingResponce: [string, number] = ["{}", 200];
+//case2
+type staff_school = [number, string, string?];
+const staff: staff_school[] = [
+  [0, "adnan", "ad@"],
+  [1, "asad", "as@"],
+  [2, "ali", "al@"],
+];
