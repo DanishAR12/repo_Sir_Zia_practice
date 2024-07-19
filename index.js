@@ -296,6 +296,7 @@ console.log(c6);
 let colorIndex2 = 4 /* Color5["blue"] */;
 console.log(colorIndex2);
 //step10_Tuples
+//A tuple is a typed array with a pre-defined length and types for each index.
 //case1
 let tuple = [33, "danish"];
 let secondElement = tuple[1];
@@ -306,3 +307,22 @@ const staff = [
     [1, "asad", "as@"],
     [2, "ali", "al@"],
 ];
+//Define our tuple
+let ourTuple;
+//initialize correctly
+ourTuple = [5, false, "coding good was here"];
+console.log(ourTuple);
+//initialize incorrectly
+//ourTuple = [false,"coding good was here",5];
+// We have no type safety in our tuple for indexes 3+
+ourTuple.push("some thing new and wrong");
+console.log(ourTuple);
+// Define our readonly tuple
+let readOnlyTuple = [5, true, "coding good"];
+// throw error it is readonly
+//readOnlyTuple.push("coding smart")
+//Named Tuple
+const graph = [34.1, 42.9];
+//Destructuring Tuple
+const graph1 = [34.1, 42.9];
+const [x5, y] = graph1;
